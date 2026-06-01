@@ -91,7 +91,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 7rem 1.5rem 5rem;
+      padding: 5rem 1.5rem 3rem;
       position: relative;
       overflow: hidden;
     }
@@ -168,28 +168,60 @@
       flex-shrink: 0;
     }
 
-    .hero-tagline {
-      max-width: 640px;
-      font-size: clamp(1.1rem, 2vw, 1.25rem);
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.75;
+    .hero-contrast {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 12px;
+      padding: 1rem 1.75rem;
       margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 640px;
     }
 
-    .hero-tagline strong {
-      color: var(--white);
-      font-weight: 600;
-      white-space: nowrap;
+    .hero-contrast-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
     }
 
-    .hero-desc {
-      max-width: 620px;
+    .hero-contrast-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
     }
+
+    .hero-contrast-stats {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .hero-contrast-side.old .hero-contrast-stats { color: var(--text-muted); }
+    .hero-contrast-side.new .hero-contrast-stats { color: var(--mars-light); }
+
+    .hero-contrast-arrow {
+      font-size: 1.4rem;
+      color: var(--mars);
+      flex-shrink: 0;
+    }
+
+    .hero-para {
+      max-width: 580px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .hero-para strong { color: var(--text); }
 
     .btn-primary {
       display: inline-flex;
@@ -703,72 +735,27 @@
       <div class="hero-meta-item"><span class="dot"></span> 10 Spots Only</div>
     </div>
 
-    <p class="hero-tagline">
-      The ability to build is no longer limited to programmers.<br/>
-      <strong>Tomorrow's leaders won't just use AI — they'll know how to direct it.</strong>
-    </p>
+    <div class="hero-contrast">
+      <div class="hero-contrast-side old">
+        <div class="hero-contrast-label">Google Earth · 2004</div>
+        <div class="hero-contrast-stats">29 engineers · 3 years · $35M</div>
+      </div>
+      <div class="hero-contrast-arrow">→</div>
+      <div class="hero-contrast-side new">
+        <div class="hero-contrast-label">Mars Maps · This Workshop</div>
+        <div class="hero-contrast-stats">1 student · 5 days · AI</div>
+      </div>
+    </div>
 
-    <p class="hero-desc">
-      This workshop is designed for curious middle schoolers who enjoy building, creating,
-      problem-solving, space, technology, entrepreneurship, or simply exploring how things work.
-      Over one week, students will learn how to work alongside modern AI tools to transform
-      ideas into real software.
+    <p class="hero-para">
+      It took 29 engineers and CIA funding to build Google Earth.
+      <strong>The same unsolved mapping problem now exists for Mars.</strong>
+      This workshop gives curious middle schoolers one week to solve it — using AI as their co-builder.
     </p>
 
     <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0;">
       <a href="https://forms.gle/jNu1gEAPmkbqnS2BA" class="btn-primary">Apply Now →</a>
       <a href="#build" class="btn-secondary">See What They'll Build</a>
-    </div>
-  </div>
-
-  <!-- Contrast Strip -->
-  <div class="contrast-strip">
-    <div class="inner">
-      <div class="contrast-eyebrow">What Changed Everything</div>
-      <div class="contrast-row">
-
-        <div class="contrast-side old">
-          <div class="contrast-side-label">The old way — Google Earth</div>
-          <div class="contrast-stat">
-            <span class="contrast-num">29</span>
-            <span class="contrast-unit">Engineers</span>
-          </div>
-          <div class="contrast-stat">
-            <span class="contrast-num">3</span>
-            <span class="contrast-unit">Years</span>
-          </div>
-          <div class="contrast-stat">
-            <span class="contrast-num">$35M</span>
-            <span class="contrast-unit">CIA-backed</span>
-          </div>
-        </div>
-
-        <div class="contrast-divider">
-          <div class="contrast-arrow">→</div>
-        </div>
-
-        <div class="contrast-side new">
-          <div class="contrast-side-label">This workshop — Mars Maps</div>
-          <div class="contrast-stat">
-            <span class="contrast-num">1</span>
-            <span class="contrast-unit">Student</span>
-          </div>
-          <div class="contrast-stat">
-            <span class="contrast-num">5</span>
-            <span class="contrast-unit">Days</span>
-          </div>
-          <div class="contrast-stat">
-            <span class="contrast-num">AI</span>
-            <span class="contrast-unit">as your co-builder</span>
-          </div>
-        </div>
-
-      </div>
-      <div class="contrast-callout">
-        Keyhole Inc. — the 29-person startup that became Google Earth — took CIA funding and three years
-        to let humans see their planet from above. <strong>The same unsolved problem now exists for Mars.</strong>
-        AI changes who can solve it.
-      </div>
     </div>
   </div>
 
