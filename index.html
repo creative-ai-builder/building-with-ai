@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building With AI — Summer Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --mars: #e8511a;
+      --mars-light: #ff6b35;
+      --mars-dark: #c03d0d;
+      --space: #08090d;
+      --space-mid: #111520;
+      --space-card: #161b28;
+      --space-border: #232b3e;
+      --star: #a0aec0;
+      --text: #e2e8f0;
+      --text-muted: #718096;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--space);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8,9,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--space-border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--mars-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--mars);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover { background: var(--mars-light); color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,81,26,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(232,81,26,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(232,81,26,0.15);
+      border: 1px solid rgba(232,81,26,0.4);
+      color: var(--mars-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--mars-light); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .hero-meta-item .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--mars-light);
+      flex-shrink: 0;
+    }
+
+    .hero-tagline {
+      max-width: 640px;
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .hero-desc {
+      max-width: 620px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--mars);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 24px rgba(232,81,26,0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--mars-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1px solid var(--space-border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      transition: border-color 0.2s, color 0.2s;
+      margin-left: 1rem;
+    }
+
+    .btn-secondary:hover { border-color: var(--mars-light); color: var(--white); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mars-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-body {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--space-border);
+      margin: 0;
+    }
+
+    /* ── BUILD GRID ── */
+    .build-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .build-card {
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .build-card:hover {
+      border-color: rgba(232,81,26,0.45);
+      transform: translateY(-2px);
+    }
+
+    .build-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .build-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .build-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── LEARN LIST ── */
+    .learn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .learn-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+
+    .learn-item:hover { border-color: rgba(232,81,26,0.4); }
+
+    .learn-check {
+      color: var(--mars-light);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* ── DIRECTORS ── */
+    .directors-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .director-card {
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+
+    .director-card:hover { border-color: rgba(232,81,26,0.4); }
+
+    .director-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mars-dark), var(--mars-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    .director-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .director-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* ── DETAILS ── */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .detail-item {
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .detail-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mars-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .tuition-box {
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, rgba(232,81,26,0.12), rgba(232,81,26,0.05));
+      border: 1px solid rgba(232,81,26,0.3);
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .tuition-box .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+
+    .tuition-box .price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .tuition-box .price-tag {
+      display: inline-block;
+      background: var(--mars);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+      letter-spacing: 0.05em;
+    }
+
+    .tuition-box .includes {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 380px;
+    }
+
+    /* ── SHOWCASE ── */
+    .showcase-box {
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .showcase-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .showcase-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .showcase-box p {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── REGISTER CTA ── */
+    .register-section {
+      background: linear-gradient(135deg, rgba(232,81,26,0.15), rgba(232,81,26,0.05));
+      border-top: 1px solid rgba(232,81,26,0.2);
+      border-bottom: 1px solid rgba(232,81,26,0.2);
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+
+    .register-section .inner { max-width: 640px; margin: 0 auto; }
+
+    .register-section h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .register-section p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--space-border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    /* ── STARS BG ── */
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      animation: twinkle linear infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .learn-grid { grid-template-columns: 1fr; }
+      .directors-grid { grid-template-columns: 1fr; }
+      .btn-secondary { margin-left: 0; margin-top: 0.75rem; }
+      .tuition-box { flex-direction: column; }
+    }
+
+    /* ensure content sits above stars */
+    nav, section, .hero, .register-section, footer { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Stars background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Nav -->
+  <nav>
+    <span class="nav-brand">Building With AI</span>
+    <ul class="nav-links">
+      <li><a href="#build">What You'll Build</a></li>
+      <li><a href="#learn">What You'll Learn</a></li>
+      <li><a href="#directors">Directors</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="https://forms.gle/jNu1gEAPmkbqnS2BA" class="nav-cta">Register →</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">Summer 2025 &nbsp;·&nbsp; Limited Enrollment</div>
+    <h1>Building<br/><span>With AI</span></h1>
+    <p class="hero-sub">A Summer AI Workshop for Middle Schoolers</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="dot"></span> July 27–31</div>
+      <div class="hero-meta-item"><span class="dot"></span> Palo Alto</div>
+      <div class="hero-meta-item"><span class="dot"></span> Rising 6th–8th Graders</div>
+      <div class="hero-meta-item"><span class="dot"></span> 10 Students Max</div>
+    </div>
+
+    <p class="hero-tagline">
+      The ability to build is no longer limited to programmers.<br/>
+      <strong>Tomorrow's leaders won't just use AI — they'll know how to direct it.</strong>
+    </p>
+
+    <p class="hero-desc">
+      This workshop is designed for curious middle schoolers who enjoy building, creating,
+      problem-solving, space, technology, entrepreneurship, or simply exploring how things work.
+      Over one week, students will learn how to work alongside modern AI tools to transform
+      ideas into real software.
+    </p>
+
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0;">
+      <a href="https://forms.gle/jNu1gEAPmkbqnS2BA" class="btn-primary">Apply Now →</a>
+      <a href="#build" class="btn-secondary">See What They'll Build</a>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- What Students Will Build -->
+  <section id="build">
+    <div class="section-label">Week-Long Project</div>
+    <h2 class="section-title">What Students Will Build</h2>
+    <p class="section-body">
+      Students will build and deploy their own interactive Mars exploration application
+      powered by real NASA mission data. On Friday, parents will be able to open and
+      interact with software their child built during the week.
+    </p>
+
+    <div class="build-grid">
+      <div class="build-card">
+        <div class="build-icon">🗺️</div>
+        <div>
+          <h3>Landing Site Maps</h3>
+          <p>Interactive Mars landing site maps built with real mission data.</p>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-icon">🤖</div>
+        <div>
+          <h3>Mission Assistants</h3>
+          <p>AI-powered Mars mission assistants that answer questions about space exploration.</p>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-icon">📊</div>
+        <div>
+          <h3>Mission Dashboards</h3>
+          <p>Data visualizations and dashboards tracking real Mars mission telemetry.</p>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-icon">🎨</div>
+        <div>
+          <h3>Custom Interfaces</h3>
+          <p>Student-designed, personalized interfaces that reflect their creative vision.</p>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-icon">🚀</div>
+        <div>
+          <h3>Exploration Missions</h3>
+          <p>Student-created Mars exploration missions with goals, timelines, and science.</p>
+        </div>
+      </div>
+      <div class="build-card">
+        <div class="build-icon">🌐</div>
+        <div>
+          <h3>Live Web App</h3>
+          <p>A fully deployed, shareable web application families can visit from any device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- What Students Will Learn -->
+  <section id="learn">
+    <div class="section-label">Curriculum</div>
+    <h2 class="section-title">What Students Will Learn</h2>
+    <p class="section-body">
+      These are increasingly foundational skills in a world where AI is part of everyday work —
+      skills that set students apart long after the week is over.
+    </p>
+
+    <div class="learn-grid">
+      <div class="learn-item"><span class="learn-check">✦</span> Turn ideas into clear requirements</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Use AI as a creative and technical partner</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Build software through prompting</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Debug and improve AI-generated code</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Work with real-world data</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Test, iterate, and refine their work</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Present and explain their thinking</div>
+      <div class="learn-item"><span class="learn-check">✦</span> Deploy software to the real internet</div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Directors -->
+  <section id="directors">
+    <div class="section-label">Your Instructors</div>
+    <h2 class="section-title">Camp Directors</h2>
+
+    <div class="directors-grid">
+      <div class="director-card">
+        <div class="director-avatar">AB</div>
+        <h3>Aarti Bharathan</h3>
+        <p>Palo Alto parent, product executive, and advisor with leadership experience at
+        Google, PayPal, and startups focused on AI-powered commerce, agentic systems,
+        and the future of work.</p>
+      </div>
+      <div class="director-card">
+        <div class="director-avatar">NG</div>
+        <h3>Nikhil George</h3>
+        <p>Palo Alto parent, Carnegie Mellon Robotics &amp; Computer Science graduate, and
+        AI technologist with experience at Meta, startups, and research organizations
+        building AI systems, robotics platforms, and large-scale software infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Program Details -->
+  <section id="details">
+    <div class="section-label">Program Details</div>
+    <h2 class="section-title">Everything You Need to Know</h2>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="detail-label">Who</div>
+        <div class="detail-value">Rising 6th–8th Graders</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">When</div>
+        <div class="detail-value">July 27–31<br/>9:00am – 2:00pm</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Where</div>
+        <div class="detail-value">Palo Alto, CA</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Cohort Size</div>
+        <div class="detail-value">Limited to<br/>10 Students</div>
+      </div>
+    </div>
+
+    <div class="tuition-box">
+      <div>
+        <div class="label">Tuition</div>
+        <div class="price">$899 <span class="price-tag">Pilot Pricing</span></div>
+      </div>
+      <div class="includes">
+        Includes software, hosting, deployment, and access to the professional AI
+        development tools used throughout the workshop.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Final Showcase -->
+  <section id="showcase">
+    <div class="section-label">End of Week</div>
+    <h2 class="section-title">Final Showcase</h2>
+    <div class="showcase-box">
+      <div class="showcase-icon">🎉</div>
+      <h3>Live Demo Day — Friday Afternoon</h3>
+      <p>
+        Families are invited to a live demo session on Friday afternoon where students
+        will present the projects they built during the week. Come see what your student
+        created — and try it yourself.
+      </p>
+    </div>
+  </section>
+
+  <!-- Register CTA -->
+  <div class="register-section" id="register">
+    <div class="inner">
+      <h2>Ready to Build?</h2>
+      <p>
+        Spots are limited to 10 students. Apply now to secure your place in this
+        summer's cohort. We'll be in touch shortly after you submit.
+      </p>
+      <a href="https://forms.gle/jNu1gEAPmkbqnS2BA" class="btn-primary" style="font-size:1.1rem; padding:1rem 2.5rem;">
+        Apply for a Spot →
+      </a>
+      <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--text-muted);">
+        July 27–31 &nbsp;·&nbsp; Palo Alto &nbsp;·&nbsp; Rising 6th–8th Grade &nbsp;·&nbsp; $899
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Building With AI &nbsp;·&nbsp; Palo Alto, CA &nbsp;·&nbsp;
+      <a href="https://forms.gle/jNu1gEAPmkbqnS2BA" style="color:var(--mars-light); text-decoration:none;">Register</a>
+    </p>
+  </footer>
+
+  <script>
+    // Generate star field
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 2 + 0.5;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random()*100}%; left:${Math.random()*100}%;
+        animation-duration:${3+Math.random()*5}s;
+        animation-delay:${Math.random()*6}s;
+        opacity:${0.2+Math.random()*0.5};
+      `;
+      container.appendChild(s);
+    }
+  </script>
+</body>
+</html>
