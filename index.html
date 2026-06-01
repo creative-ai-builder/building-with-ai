@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Building With AI — Summer Workshop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -212,16 +212,60 @@
       flex-shrink: 0;
     }
 
-    .hero-para {
-      max-width: 580px;
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 2rem;
-      text-align: center;
+    .hero-infobox {
+      width: 100%;
+      max-width: 560px;
+      background: var(--space-card);
+      border: 1px solid var(--space-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      text-align: left;
     }
 
-    .hero-para strong { color: var(--text); }
+    .hib-header {
+      background: rgba(232,81,26,0.12);
+      border-bottom: 1px solid rgba(232,81,26,0.25);
+      padding: 0.55rem 1.25rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--mars-light);
+    }
+
+    .hib-body {
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hib-row {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+
+    .hib-key {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--mars-light);
+      opacity: 0.85;
+    }
+
+    .hib-val {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .hib-val em {
+      color: var(--text-muted);
+      font-style: normal;
+    }
 
     .btn-primary {
       display: inline-flex;
@@ -757,11 +801,27 @@
       <div class="hero-meta-item"><span class="dot"></span> 10 Spots Only</div>
     </div>
 
-    <p class="hero-para">
-      1 kid. 5 days. AI. <strong>Building Mars Maps</strong> — the equivalent of Google Maps,
-      initially built by 29 engineers over 3 years, funded by the CIA.
-      Taught by Aarti &amp; Nikhil, Palo Alto parents and AI innovators from Google, Meta, and startups.
-    </p>
+    <div class="hero-infobox">
+      <div class="hib-header">— MISSION BRIEFING —</div>
+      <div class="hib-body">
+        <div class="hib-row">
+          <span class="hib-key">OBJECTIVE</span>
+          <span class="hib-val">Build Mars Maps</span>
+        </div>
+        <div class="hib-row">
+          <span class="hib-key">TIMELINE</span>
+          <span class="hib-val">5 days · 1 student · AI co-builder</span>
+        </div>
+        <div class="hib-row">
+          <span class="hib-key">CONTEXT</span>
+          <span class="hib-val">Google Maps equivalent — <em>29 engineers · 3 yrs · CIA-funded</em></span>
+        </div>
+        <div class="hib-row">
+          <span class="hib-key">DIRECTORS</span>
+          <span class="hib-val">Aarti · Google / PayPal<br/>Nikhil · Meta / CMU Robotics</span>
+        </div>
+      </div>
+    </div>
 
     <div class="hero-contrast">
       <div class="hero-contrast-side old">
