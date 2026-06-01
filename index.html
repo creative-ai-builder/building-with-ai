@@ -563,6 +563,103 @@
       50% { opacity: 1; }
     }
 
+    /* ── CONTRAST STRIP ── */
+    .contrast-strip {
+      border-top: 1px solid var(--space-border);
+      border-bottom: 1px solid var(--space-border);
+      background: var(--space-card);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .contrast-strip .inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .contrast-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mars-light);
+      margin-bottom: 1.75rem;
+    }
+
+    .contrast-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .contrast-side {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      min-width: 220px;
+    }
+
+    .contrast-side-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .contrast-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .contrast-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .contrast-unit {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .contrast-side.old .contrast-num { color: var(--text-muted); }
+    .contrast-side.new .contrast-num { color: var(--mars-light); }
+
+    .contrast-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--space-border);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contrast-arrow {
+      font-size: 2rem;
+      color: var(--mars);
+    }
+
+    .contrast-callout {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      border-top: 1px solid var(--space-border);
+      padding-top: 2rem;
+    }
+
+    .contrast-callout strong { color: var(--text); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 720px) {
       .nav-links { display: none; }
@@ -621,6 +718,57 @@
     <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0;">
       <a href="https://forms.gle/jNu1gEAPmkbqnS2BA" class="btn-primary">Apply Now →</a>
       <a href="#build" class="btn-secondary">See What They'll Build</a>
+    </div>
+  </div>
+
+  <!-- Contrast Strip -->
+  <div class="contrast-strip">
+    <div class="inner">
+      <div class="contrast-eyebrow">What Changed Everything</div>
+      <div class="contrast-row">
+
+        <div class="contrast-side old">
+          <div class="contrast-side-label">The old way — Google Earth</div>
+          <div class="contrast-stat">
+            <span class="contrast-num">29</span>
+            <span class="contrast-unit">Engineers</span>
+          </div>
+          <div class="contrast-stat">
+            <span class="contrast-num">3</span>
+            <span class="contrast-unit">Years</span>
+          </div>
+          <div class="contrast-stat">
+            <span class="contrast-num">$35M</span>
+            <span class="contrast-unit">CIA-backed</span>
+          </div>
+        </div>
+
+        <div class="contrast-divider">
+          <div class="contrast-arrow">→</div>
+        </div>
+
+        <div class="contrast-side new">
+          <div class="contrast-side-label">This workshop — Mars Maps</div>
+          <div class="contrast-stat">
+            <span class="contrast-num">1</span>
+            <span class="contrast-unit">Student</span>
+          </div>
+          <div class="contrast-stat">
+            <span class="contrast-num">5</span>
+            <span class="contrast-unit">Days</span>
+          </div>
+          <div class="contrast-stat">
+            <span class="contrast-num">AI</span>
+            <span class="contrast-unit">as your co-builder</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="contrast-callout">
+        Keyhole Inc. — the 29-person startup that became Google Earth — took CIA funding and three years
+        to let humans see their planet from above. <strong>The same unsolved problem now exists for Mars.</strong>
+        AI changes who can solve it.
+      </div>
     </div>
   </div>
 
